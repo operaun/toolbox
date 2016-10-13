@@ -12,6 +12,7 @@ sudo ln -s ${DISTCC_DIR}/distcc_hosts.conf ${HOSTS_DIR}/hosts
 #grep ${MY_IP}/24 ${DISTCC_DIR}/distcc_hosts.conf || echo ${MY_IP}/24 >> ${DISTCC_DIR}/distcc_hosts.conf
 
 grep distccd_enable /etc/rc.conf || echo "distccd_enable=\"YES\"" | sudo tee -a /etc/rc.conf > /dev/null
+# TODO(jongmin): Aceeptable ips should be passed by command line (or default from MY_IP)
 grep distccd_flags /etc/rc.conf || echo "distccd_flags=\"--allow 192.168.11.0/24 --listen ${MY_IP} --port 3632 --user distcc --log-file=/var/log/distccd.log --daemon -P /var/run/distccd.pid -N 20 -j 5\"" | sudo tee -a /etc/rc.conf > /dev/null
 
 grep ${HOME}/.profile CCACHE_PREFIX || echo "export CCACHE_PREFIX=\"distcc\"" | tee -a ${HOME}/.profile > /dev/null

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo Converting $1 to $2... 
+for file in `grep -lr "$1" *`
+  do 
+    # The files which has this extensions should be passed
+    case $file in *.cc|*.cpp|*.h|*.hpp )
+      sed -i "s,$1,$2,g" $file
+      echo $file is converted.
+    esac
+  done
